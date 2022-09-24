@@ -11,10 +11,10 @@ CREATE DATABASE SpotifyClone;
   ) engine = InnoDB;
 
   CREATE TABLE SpotifyClone.Artists(
-      artists_id INT NOT NULL,
+      artistas INT NOT NULL,
       artists_name VARCHAR(45) NOT NULL,
 
-      CONSTRAINT PRIMARY KEY (artists_id)
+      CONSTRAINT PRIMARY KEY (artistas)
   ) engine = InnoDB;
 
   CREATE TABLE SpotifyClone.Clients(
@@ -30,24 +30,24 @@ CREATE DATABASE SpotifyClone;
   ) engine = InnoDB;
 
     CREATE TABLE SpotifyClone.Albuns(
-      album_id INT NOT NULL,
+      album INT NOT NULL,
       albuns_name VARCHAR(45) NOT NULL,
       albuns_release_year VARCHAR(45) NOT NULL,
       artist_id INT NOT NULL,
 
-      FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists(artists_id),
-      CONSTRAINT PRIMARY KEY (album_id)
+      FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists(artistas),
+      CONSTRAINT PRIMARY KEY (album)
   ) engine = InnoDB;
 
   CREATE TABLE SpotifyClone.Songs(
 	  album_artist_id INT NOT NULL,
-      songs_id VARCHAR(45) NOT NULL,
+      cancoes VARCHAR(45) NOT NULL,
       songs_id_num INT NOT NULL,
       duration_id INT NOT NULL,
       artist_id INT NOT NULL,
 
-      FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists(artists_id),
-      FOREIGN KEY (album_artist_id) REFERENCES SpotifyClone.Albuns(album_id),
+      FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists(artistas),
+      FOREIGN KEY (album_artist_id) REFERENCES SpotifyClone.Albuns(album),
 
       CONSTRAINT PRIMARY KEY (songs_id_num)
   ) engine = InnoDB;
@@ -57,7 +57,7 @@ CREATE DATABASE SpotifyClone;
       artist_id INT NOT NULL,
 
       FOREIGN KEY (client_id) REFERENCES SpotifyClone.Clients(client_id),
-      FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists(artists_id),
+      FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists(artistas),
 
       CONSTRAINT PRIMARY KEY(client_id, artist_id)
   ) engine = InnoDB;
@@ -80,7 +80,7 @@ CREATE DATABASE SpotifyClone;
     (3, 'universitário', 5.99),
     (4, 'pessoal', 6.99);
 
-  INSERT INTO SpotifyClone.Artists (artists_id,artists_name)
+  INSERT INTO SpotifyClone.Artists (artistas,artists_name)
   VALUES
   ( 1, 'Beyoncé'),
   ( 2, 'Queen'),
@@ -102,7 +102,7 @@ CREATE DATABASE SpotifyClone;
     ('Judith Butler', 45, '2020-05-13', 4, 9),
     ('Jorge Amado', 58, '2017-02-17', 4, 10);
     
-	INSERT INTO SpotifyClone.Albuns (albuns_name, albuns_release_year, album_id, artist_id)
+	INSERT INTO SpotifyClone.Albuns (albuns_name, albuns_release_year, album, artist_id)
   VALUES
   ('Renaissance', 2022, 1, 1),
   ('Jazz', 1978, 2, 2),
@@ -113,7 +113,7 @@ CREATE DATABASE SpotifyClone;
   ('Somewhere Far Beyond', 2007, 7, 5),
   ('I Put A Spell On You', 2012, 8, 6);
     
-    INSERT INTO SpotifyClone.Songs (songs_id, duration_id, artist_id, songs_id_num, album_artist_id)
+    INSERT INTO SpotifyClone.Songs (cancoes, duration_id, artist_id, songs_id_num, album_artist_id)
   VALUES
   ('BREAK MY SOUL', 279, 1, 1, 1),
   ('VIRGO’S GROOVE', 369, 1, 2, 1),
